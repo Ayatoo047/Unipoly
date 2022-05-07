@@ -78,10 +78,10 @@ def home(request):
 
 def userprofile(request, pk):
     user = User.objects.get(id=pk)
-    room = user.room_set.all()
+    rooms = user.room_set.all()
     room_messages = user.message_set.all()
     topics = Topic.objects.all()
-    context = {"user": user, 'room': room, 'room_messages': room_messages, 'topics': topics}
+    context = {"user": user, 'rooms': rooms, 'room_messages': room_messages, 'topics': topics}
     return render(request, "base/user_profile.html", context) 
 
 
