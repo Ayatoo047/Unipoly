@@ -15,4 +15,5 @@ urlpatterns = [
     path('delete-room/<str:pk>/', views.deleteroom, name = "deleteroom"),
     path('delete-message/<str:pk>/', views.deletemessage, name = "deletemessage"),
     path('user-profile/<str:pk>/', views.userprofile, name = "userprofile"),
+    path('edit-user/<str:pk>/', views.updateuser, name = "edituser"),
 ]

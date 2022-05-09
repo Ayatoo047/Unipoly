@@ -99,6 +99,7 @@
                 </div>
                 
                 {% if request.user == message.user %}
+                <a href="{% url 'deletemessage' message.id %}">
                 <div class="thread__delete">
                   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
                     <title>remove</title>
@@ -107,6 +108,7 @@
                     ></path>
                   </svg>
                 </div>
+                </a>
                 {%endif%}
 
               </div>
@@ -120,10 +122,15 @@
         </div>
       </div>
 
+      {% if request.user.is_authenticated %}
       <div class="room__message">
-        <form action="POST"><input name="message.body" placeholder="Write your message here..." /></form>
+        <form action="" method="POST">
+          {% csrf_token %}
+        <input name="message.body" placeholder="Write your message here..." />
+        </form>
       </div>
     </div>
+    {% endif %}
     <!-- Room End -->
 
     <!--   Start -->
