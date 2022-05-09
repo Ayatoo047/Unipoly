@@ -193,3 +193,18 @@ def updateuser(request, pk):
     context = {'user': user, 'form': form}
     return render(request, 'base/edituser.html', context)
 
+
+def topics(request):
+    topics = Topic.objects.all()
+
+    context = {'topics': topics}
+    return render(request, 'base/topics-mobile.html', context)
+
+
+def activitypage(request):
+    room_messages = Message.objects.all()
+
+    return render(request, 'base/activity.html', {"room_messages": room_messages})
+
+
+
