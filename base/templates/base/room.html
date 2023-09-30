@@ -1,6 +1,7 @@
 {% extends "main.html"%}
+{% load static %}
 
-    {% block content %}
+{% block content %}
 
 <main class="profile-page layout layout--2">
   <div class="container">
@@ -63,7 +64,7 @@
       <div class="room__box scroll">
         <div class="room__header scroll">
           <div class="room__info">
-            <h3>{{room.name}}</h3>
+            <h3 id='room_name' >{{room.name}}</h3>
             <span>{{room.created|timesince}} ago</span>
           </div>
           <div class="room__hosted">
@@ -82,8 +83,8 @@
           </div> -->
           <span class="room__topics">{{room.topic}}</span>
         </div>
-        <div class="room__conversation">
-          <div class="threads scroll">
+        <div class="room__conversation" id="conversationDiv">
+          <div class="threads scroll" id='threadscroll'>
 
             {% for message in room_messages %}
             <div class="thread">
@@ -124,9 +125,10 @@
 
       {% if request.user.is_authenticated %}
       <div class="room__message">
-        <form action="" method="POST">
+        <form method="POST" id='textform'> 
+          {% comment %} onsubmit=console.log('venustas') {% endcomment %}
           {% csrf_token %}
-        <input name="message.body" placeholder="Write your message here..." />
+        <input id='textinput' name="message.body" required placeholder="Write your message here..." />
         </form>
       </div>
     </div>
@@ -154,6 +156,15 @@
   </div>
 </main>
 
+
+<script src="{% static 'js/room.js' %}"></script>
+{% comment %} <script>
+  const textinput = document.getElementById('textinput').innerText;
+  function sendmessage() {socket.send(JSON.stringify({
+  'message': textinput,
+  'sender': username
+}));}
+</script> {% endcomment %}
 {% endblock %}
 
 

@@ -22,6 +22,8 @@
 
             {% if request.user == user%}
             <a href="{% url 'edituser' user.id %}" class="btn btn--main btn--pill">Edit Profile</a>
+            {% else %}
+            <a href="#" class="btn btn--main btn--pill">send message</a>
             {% endif %}
           </div>
           <div class="profile__about">

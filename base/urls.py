@@ -18,4 +18,5 @@ urlpatterns = [
     path('edit-user/<str:pk>/', views.updateuser, name = "edituser"),
     path('topics/', views.topics, name = "topics"),
     path('activity/', views.activitypage, name = "activity"),
+    path('lastmessage/<str:name>', views.lastMessage, name = "lastmessage"),
 ]
