@@ -86,16 +86,16 @@ ASGI_APPLICATION = 'unipoly.asgi.application'
 #         },
 #     },
 # }
-
-"default": {
-    "BACKEND": "channels_redis.pubsub.RedisPubSubChannelLayer",
-    "CONFIG": {
-        "hosts":[{
-            "address": "redis://red-ckcudeciibqc73ej0p6g:6379",  # "REDIS_TLS_URL"
-            "ssl_cert_reqs": None,
-        }]
-    }
-}
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.pubsub.RedisPubSubChannelLayer",
+        "CONFIG": {
+            "hosts":[{
+                "address": "redis://red-ckcudeciibqc73ej0p6g:6379",  # "REDIS_TLS_URL"
+                "ssl_cert_reqs": None,
+            }]
+        }
+    }}
 
 # CHANNEL_LAYERS = {
 #     "default": {
