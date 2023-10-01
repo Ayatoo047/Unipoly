@@ -164,7 +164,7 @@ textForm.addEventListener('submit', (event) => {
   //     'sender': username
   //   }));})
   //  console.log(roomName)
-  const socket = new WebSocket(`wss://${window.location.host}/wss/chat/${slug}/`)
+  const socket = new WebSocket(`wss://${window.location.host}/ws/chat/${slug}/`)
   
   socket.onmessage = function(e) {
     // console.log('Server: ' + e.data);

@@ -78,13 +78,23 @@ TEMPLATES = [
 WSGI_APPLICATION = 'unipoly.wsgi.application'
 ASGI_APPLICATION = 'unipoly.asgi.application'
 
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
-        },
-    },
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [("127.0.0.1", 6379)],
+#         },
+#     },
+# }
+
+"default": {
+    "BACKEND": "channels_redis.pubsub.RedisPubSubChannelLayer",
+    "CONFIG": {
+        "hosts":[{
+            "address": "redis://red-ckcudeciibqc73ej0p6g:6379",  # "REDIS_TLS_URL"
+            "ssl_cert_reqs": None,
+        }]
+    }
 }
 
 # CHANNEL_LAYERS = {
