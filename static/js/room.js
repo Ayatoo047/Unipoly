@@ -26,10 +26,8 @@ const inputText = roomName;
 const slug = slugify(inputText);
 // console.log(slug);
 
-//  console.log(roomName)
- const socket = new WebSocket(`ws://${window.location.host}/ws/chat/${slug}/`)
 
- textForm.addEventListener('submit', (event) => {
+textForm.addEventListener('submit', (event) => {
   // if (socket.CLOSED){
   //   socket = new WebSocket(`ws://${window.location.host}/ws/chat/${slug}/`)
   // }
@@ -37,10 +35,10 @@ const slug = slugify(inputText);
     event.preventDefault()
     const textInput = textinput.value
     socket.send(JSON.stringify({
-        'message': textInput,
-        'sender': username
+      'message': textInput,
+      'sender': username
       }));
-    // console.log(message,sender)
+      // console.log(message,sender)
  })
 
  function scrollToConversationBottom() {
@@ -61,12 +59,12 @@ const slug = slugify(inputText);
     // Create the thread__author section
     const threadAuthor = document.createElement('div');
     threadAuthor.classList.add('thread__author');
-
+    
     // Create a link to the user profile
     const userLink = document.createElement('a');
     userLink.href = username; // You can replace 'username' with the actual URL
     userLink.classList.add('thread__authorInfo');
-
+    
     // Create the avatar
     const avatar = document.createElement('div');
     avatar.classList.add('avatar', 'avatar--small');
@@ -81,12 +79,12 @@ const slug = slugify(inputText);
     // Append avatar and username to userLink
     userLink.appendChild(avatar);
     userLink.appendChild(usernameSpan);
-
+    
     // Create the thread__date span
     const dateSpan = document.createElement('span');
     dateSpan.classList.add('thread__date');
     // You can set the date content here
-
+    
     // Append userLink and dateSpan to threadAuthor
     threadAuthor.appendChild(userLink);
     threadAuthor.appendChild(dateSpan);
@@ -103,35 +101,35 @@ const slug = slugify(inputText);
     deleteIcon.setAttribute('width', '32');
     deleteIcon.setAttribute('height', '32');
     deleteIcon.setAttribute('viewBox', '0 0 32 32');
-
+    
     // Create the title for the delete icon
     const deleteTitle = document.createElement('title');
     deleteTitle.textContent = 'remove';
-
+    
     // Create the path for the delete icon
     const deletePath = document.createElement('path');
     deletePath.setAttribute('d', 'M27.314 6.019l-1.333-1.333-9.98 9.981-9.981-9.981-1.333 1.333 9.981 9.981-9.981 9.98 1.333 1.333 9.981-9.98 9.98 9.98 1.333-1.333-9.98-9.98 9.98-9.981z');
-
+    
     // Append title and path to deleteIcon
     deleteIcon.appendChild(deleteTitle);
     deleteIcon.appendChild(deletePath);
-
+    
     // Append deleteIcon to deleteLink
     deleteLink.appendChild(deleteIcon);
-
+    
     // Create the thread__details div
     const threadDetails = document.createElement('div');
     threadDetails.classList.add('thread__details');
     threadDetails.textContent = messageText; // You can replace 'messageText' with the actual message content
-
+    
     // Append threadAuthor, deleteLink, and threadDetails to threadTop
     threadTop.appendChild(threadAuthor);
     threadTop.appendChild(deleteLink);
-
+    
     // Append threadTop and threadDetails to the newThread
     newThread.appendChild(threadTop);
     newThread.appendChild(threadDetails);
-
+    
     // Append the newThread to the 'threadscroll' div
     const threadscrollDiv = document.getElementById('threadscroll');
     console.log('alomst')
@@ -142,36 +140,40 @@ const slug = slugify(inputText);
 
 //  // Add a keydown event listener to the input element
 //  textform.addEventListener('keydown', function (event) {
-//    // Check if the Enter key (key code 13) is pressed
-//    if (event.key === 13) {
-//      // Prevent the default form submission
-//     //  event.preventDefault();
-//      console.log('entered')
-
-//      // Get the input value
-//      const inputValue = textinput.value;
-
-//      // Do something with the input value (e.g., display it, send it to the server)
+  //    // Check if the Enter key (key code 13) is pressed
+  //    if (event.key === 13) {
+    //      // Prevent the default form submission
+    //     //  event.preventDefault();
+    //      console.log('entered')
+    
+    //      // Get the input value
+    //      const inputValue = textinput.value;
+    
+    //      // Do something with the input value (e.g., display it, send it to the server)
 //      console.log('Input Value:', inputValue);
 
 //      // You can also reset the input field if needed
 //      textInput.value = '';
 //    }
 //  });
- 
+
 // const socket = new WebSocket(`ws://${window.location.host}/ws/chat/yy/`)
 // socket.onopen = (function(e) {
 //     socket.send(JSON.stringify({
-//     'message': textinput,
-//     'sender': username
-//   }));})
-
-socket.onmessage = function(e) {
+  //     'message': textinput,
+  //     'sender': username
+  //   }));})
+  //  console.log(roomName)
+  const socket = new WebSocket(`ws://${window.location.host}/ws/chat/${slug}/`)
+  
+  socket.onmessage = function(e) {
     // console.log('Server: ' + e.data);
     const {sender, message, create, user_url} = JSON.parse(e.data)
     // appendThreadToThreadscroll(sender, message, 'https://randomuser.me/api/portraits/men/37.jpg');
     // console.log(message)
-
+    if (!(create)){
+      location.reload()
+    }
 
     // async function fetchData() {
     //     const url = `/lastmessage/${roomName}`; // Replace with your API URL
@@ -237,7 +239,7 @@ socket.onmessage = function(e) {
                     </div>
                     <span>@${sender}</span>
                   </a>
-                  <span class="thread__date">${created}</span>
+                  <span class="thread__date">${create}</span>
                 </div>
               </div>
               <div class="thread__details">
