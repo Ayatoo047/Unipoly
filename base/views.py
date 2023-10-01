@@ -140,6 +140,7 @@ def createroom(request):
             topic = topic,
             name = request.POST.get("name"),
             description = request.POST.get("description"),
+            question = 'no question'
         )
         # form = RoomForm(request.POST)
         # if form.is_valid():
