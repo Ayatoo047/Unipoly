@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -82,7 +82,9 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
+             "address": "rediss://red-ckcudeciibqc73ej0p6g:SlLNzkkXoLCeZmIz0M8SzK4Dqnow5ZbE@oregon-redis.render.com:6379",  # "REDIS_TLS_URL"
+            "ssl_cert_reqs": None,
+            "on_disconnect": "redis.disconnect"
         },
     },
 }
@@ -93,18 +95,18 @@ CHANNEL_LAYERS = {
 #     }
 # }
 
-if DEBUG == False:
-    CHANNEL_LAYERS = {
-        "default": {
-            "BACKEND": "channels_redis.pubsub.RedisPubSubChannelLayer",
-            "CONFIG": {
-                "hosts":[{
-                    "address": "rediss://red-ckcudeciibqc73ej0p6g:SlLNzkkXoLCeZmIz0M8SzK4Dqnow5ZbE@oregon-redis.render.com:6379",  # "REDIS_TLS_URL"
-                    "ssl_cert_reqs": None,
-                    "on_disconnect": "redis.disconnect"
-                }]
-            }
-        }}
+# if DEBUG == False:
+#     CHANNEL_LAYERS = {
+#         "default": {
+#             "BACKEND": "channels_redis.pubsub.RedisPubSubChannelLayer",
+#             "CONFIG": {
+#                 "hosts":[{
+#                     "address": "rediss://red-ckcudeciibqc73ej0p6g:SlLNzkkXoLCeZmIz0M8SzK4Dqnow5ZbE@oregon-redis.render.com:6379",  # "REDIS_TLS_URL"
+#                     "ssl_cert_reqs": None,
+#                     "on_disconnect": "redis.disconnect"
+#                 }]
+#             }
+#         }}
 
 
 # Database

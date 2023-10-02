@@ -6,4 +6,4 @@ Pillow==9.5.0
 gunicorn
 whitenoise
 python-dotenv
-channels-redis==3.4.1
+channels-redis
