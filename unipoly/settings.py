@@ -82,9 +82,10 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-             "address": "rediss://red-ckcudeciibqc73ej0p6g:SlLNzkkXoLCeZmIz0M8SzK4Dqnow5ZbE@oregon-redis.render.com:6379",  # "REDIS_TLS_URL"
-            "ssl_cert_reqs": None,
-            "on_disconnect": "redis.disconnect"
+            #  "hosts": ["redis://default:redispw@localhost:32770", 'redis://redis:6379'],  # "REDIS_TLS_URL"
+             "hosts": ['redis://redis:6379'],  # "REDIS_TLS_URL"
+            # "ssl_cert_reqs": None,
+            # "on_disconnect": "redis.disconnect"
         },
     },
 }
