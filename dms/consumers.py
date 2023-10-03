@@ -96,8 +96,8 @@ class RoomConsumer(AsyncWebsocketConsumer):
             created = 0
             user_url = 0
 
-        print('else is true')
-        print("message is thhhhis: ", self.new_message)
+        # print('else is true')
+        # print("message is thhhhis: ", self.new_message)
         await self.send(text_data=json.dumps({
         'message': message,
         'sender': sender,
