@@ -1,0 +1,29 @@
+services:
+  - name: web
+    type: web
+    repo: https://github.com/Ayatoo047/Unipoly.git
+    buildCommand: "docker build -t my-django-app ."
+    startCommand: "docker run -p $PORT:10000 my-django-app"
+    automaticTLS: true
+    envVars:
+      - key: redis://redis:6379
+        fromService:
+          type: redis
+          name: redis
+          property: host
+      - key: 6379
+        fromService:
+          type: redis
+          name: redis
+          property: port
+    automaticTLS: true
+
+  - name: redis
+    type: redis
+    plan: free # Adjust the plan as needed
+    ipAllowList:
+      - source: 0.0.0.0/0 # Adjust the source as needed (this allows all sources)
+
+# databases: []
+
+# envVarGroups: []
