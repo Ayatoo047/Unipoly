@@ -4,7 +4,6 @@ services:
     repo: https://github.com/Ayatoo047/Unipoly.git
     buildCommand: "docker build -t my-django-app ."
     startCommand: "docker run -p $PORT:10000 my-django-app"
-    automaticTLS: true
     envVars:
       - key: redis://redis:6379
         fromService:
