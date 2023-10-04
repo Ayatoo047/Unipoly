@@ -5,11 +5,13 @@ volumes:
 services:
   web:
     build: .
-    command: ["python", "manage.py", "runserver", '0.0.0.0:10000']
+    command: ["python", "manage.py", "runserver", "0.0.0.0:10000"]
     ports:
       - 10000:10000
     volumes:
       - .:/app
+    depends_on:
+      - redis
   redis:
     image: redis:latest
     volumes:
