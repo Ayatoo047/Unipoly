@@ -10,6 +10,8 @@ services:
       - 10000:10000
     volumes:
       - .:/app
+    depends_on:
+      - redis
   redis:
     image: redis:latest
     volumes:
