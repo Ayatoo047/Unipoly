@@ -16,8 +16,6 @@ services:
           type: redis
           name: redis
           property: port
-    automaticTLS: true
-
   - name: redis
     type: redis
     plan: free # Adjust the plan as needed
